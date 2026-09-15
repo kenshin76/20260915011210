@@ -1,0 +1,41 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 내려받기
+        uses: actions/checkout@v4
+
+      # enablement: true — 저장소 설정에서 Pages 를 따로 켜지 않아도 첫 실행 때 켜집니다.
+      - name: Pages 설정
+        uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      # 빌드 단계가 없습니다. 두 자료 모두 정적 HTML·CSS·JS 입니다.
+      - name: 저장소 전체를 산출물로 올리기
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: 배포
+        id: deployment
+        uses: actions/deploy-pages@v4

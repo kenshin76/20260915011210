@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>페이지를 찾을 수 없습니다 — 위시켓 158459 제안 자료</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light">
+<style>
+:root{
+  --red-700:#DC2828; --red-800:#C00000; --coral-150:#FFCBC9; --coral-100:#FFEDEC;
+  --coral-50:#FFF6F5;
+  --ink-900:#000; --ink-700:#3F3F3F; --ink-600:#595959; --ink-500:#5F5F5F;
+  --line:#DCDCDC; --surface-1:#F9F9F9; --white:#FFF;
+  --f:'Pretendard','Pretendard Variable',-apple-system,BlinkMacSystemFont,
+      'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;}
+body{margin:0; min-height:100vh; display:grid; place-items:center; padding:24px;
+  background:linear-gradient(180deg,var(--coral-50),var(--surface-1) 60%);
+  color:var(--ink-700); font-family:var(--f); font-size:16px; line-height:1.7;
+  letter-spacing:-.01em; word-break:keep-all;}
+.box{width:100%; max-width:560px; background:var(--white); border:1px solid var(--line);
+  border-radius:22px; padding:clamp(26px,4vw,40px); box-shadow:0 18px 48px rgba(0,0,0,.08);}
+.code{display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:.1em;
+  color:var(--red-800); background:var(--coral-100); padding:5px 12px;
+  border-radius:999px; margin-bottom:16px;}
+h1{margin:0 0 12px; font-size:clamp(21px,3.2vw,28px); color:var(--ink-900); font-weight:800;
+  letter-spacing:-.03em; line-height:1.3;}
+p{margin:0; font-size:15px; color:var(--ink-600);}
+#req{margin-top:14px; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:13px;
+  color:var(--ink-500); background:var(--surface-1); border:1px solid var(--line);
+  border-radius:10px; padding:11px 14px; overflow-wrap:anywhere;}
+#links{margin-top:24px; display:grid; gap:9px;}
+#links a{display:flex; align-items:center; justify-content:space-between; gap:12px;
+  min-height:56px; padding:14px 18px; border:1px solid var(--line); border-radius:14px;
+  color:var(--ink-900); text-decoration:none; font-weight:700; font-size:15px;
+  transition:border-color .2s,background .2s,color .2s;}
+#links a:hover{border-color:var(--red-700); background:var(--coral-50); color:var(--red-800);}
+#links a em{font-style:normal; font-weight:400; font-size:13px; color:var(--ink-500);}
+#links a svg{width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2;
+  stroke-linecap:round; stroke-linejoin:round; flex:0 0 auto;}
+:focus-visible{outline:3px solid var(--red-700); outline-offset:3px; border-radius:8px;}
+</style>
+</head>
+<body>
+<div class="box">
+  <span class="code">404 NOT FOUND</span>
+  <h1>요청하신 주소를 찾을 수 없습니다</h1>
+  <p>주소가 잘못 입력되었거나 자료가 이동했을 수 있습니다. 아래에서 원하시는 자료를 골라 주십시오.</p>
+  <div id="req">요청 경로를 확인하는 중…</div>
+  <nav id="links" aria-label="자료 바로가기"></nav>
+</div>
+<script>
+(function () {
+  /* 저장소 이름이 경로에 들어가는 배포(user.github.io/REPO/)와
+     사용자 도메인 루트 배포를 모두 지원하도록, 기준 경로를 실행 시점에 판정한다. */
+  var REPO = '20260915011210';
+  var seg = location.pathname.split('/').filter(Boolean);
+  var base = '/';
+  if (seg.length) {
+    if (seg[0] === REPO) base = '/' + REPO + '/';
+    else if (/\.github\.io$/i.test(location.hostname)) base = '/' + seg[0] + '/';
+  }
+  var req = document.getElementById('req');
+  req.textContent = '요청 경로 — ' + location.pathname + (location.search || '');
+  /* 폴더가 아니라 파일을 직접 가리킨다.
+     폴더 경로(proposal/)는 「폴더 안의 index.html 을 대신 내보내는」 서버가 있어야
+     동작한다. 파일을 그대로 열어 본 경우(file://)에는 그 처리를 해 줄 서버가 없어
+     폴더 목록이 나온다. 파일명을 적으면 서버가 있든 없든 똑같이 열린다. */
+  var items = [
+    ['index.html', '자료 첫 화면', '두 자료로 나뉩니다'],
+    ['proposal/index.html', '웹 제안서', '10개 섹션 요약'],
+    ['prototype/index.html', '상품권 스토어 프로토타입', '20화면 · 눌러서 확인']
+  ];
+  var nav = document.getElementById('links');
+  nav.innerHTML = items.map(function (it) {
+    return '<a href="' + base + it[0] + '"><span>' + it[1] + ' <em>' + it[2] + '</em></span>' +
+      '<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>';
+  }).join('');
+})();
+</script>
+</body>
+</html>
