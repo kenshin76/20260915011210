@@ -147,6 +147,13 @@ hr{border:0; border-top:1px solid var(--hair); margin:34px 0}
   font-family:inherit; font-size:12px; cursor:pointer; transition:.2s
 }
 .btn-i:hover{border-color:var(--key); color:var(--key-strong)}
+.hero-home{
+  display:flex; width:max-content; align-items:center; gap:7px; margin:0 0 20px;
+  padding:8px 12px; border:1px solid var(--key-edge); background:var(--card);
+  color:var(--key-strong); text-decoration:none; font-size:12.5px; font-weight:700;
+  transition:border-color .2s,color .2s,transform .2s
+}
+.hero-home:hover{border-color:var(--key); transform:translateX(-2px)}
 /* 아이콘 — 전역 svg{} 선택자를 쓰지 않는다 (차트·도형 오염 방지) */
 svg.ic{width:15px; height:15px; flex:0 0 auto; fill:none; stroke:currentColor;
   stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round}
@@ -476,6 +483,7 @@ footer{background:var(--bg); border-top:1px solid var(--hair); padding:36px 0 46
 @media (max-width:900px){
   .tb-logo{display:none}
   .btn-i span{display:none}
+  .tb-home span{display:inline}
   .btn-i{padding:0 9px}
   .kv{grid-template-columns:1fr; gap:3px 0}
   .kv dd{margin-bottom:10px}
@@ -504,7 +512,7 @@ footer{background:var(--bg); border-top:1px solid var(--hair); padding:36px 0 46
   }
   @page{size:A4; margin:14mm 12mm}
   body{font-size:9.6pt; line-height:1.5; background:#fff}
-  .topbar,.progress,.totop,.hero-tick,.tb-act{display:none !important}
+  .topbar,.progress,.totop,.hero-tick,.tb-act,.hero-home{display:none !important}
   .rv{opacity:1 !important; transform:none !important}
   .bar-t i{width:var(--w) !important}
   .g-bar{width:var(--w) !important}

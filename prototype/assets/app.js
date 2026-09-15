@@ -117,6 +117,9 @@
         return '<a href="' + n[0] + '"' + (on ? ' class="on"' : '') + '>' + n[1] + '</a>';
       }).join('') + '</nav>' +
       '<div class="hd-act">' +
+        '<a class="main-return" href="../index.html" aria-label="제안 자료 메인으로">' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 5l8 6.5V20h-5v-5.5H9V20H4z"></path></svg>' +
+          '<span>메인으로</span></a>' +
         '<span class="gradechip"><i class="dot"></i>내 등급 <b>' + esc(g.name) + '</b></span>' +
         (S.login ? '<a class="lk" href="#/mypage">내 정보</a>' : '<a class="lk" href="#/login">로그인</a>') +
       '</div></div></header>';
